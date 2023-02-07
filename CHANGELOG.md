@@ -3,6 +3,7 @@
 ### 🌟 新功能
 范围|描述|commitId
 --|--|--
+ - | 完成图片审核功能 | [7edd990](https://github.com/picture-waterfall/picture-waterfall-admin/commit/7edd990)
  - | 完成页面 Header 与 Table 构建 | [bd001dd](https://github.com/picture-waterfall/picture-waterfall-admin/commit/bd001dd)
  - | 展示上传的图⽚列表，⽀持翻⻚ | [a4444d2](https://github.com/picture-waterfall/picture-waterfall-admin/commit/a4444d2)
 

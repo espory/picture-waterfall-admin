@@ -17,7 +17,15 @@ export function getItemTotal() {
     params: {},
   });
 }
-
+export function postDelPic(id) {
+  return fetch({
+    url: "/pic/del",
+    method: "post",
+    data: {
+      id,
+    },
+  });
+}
 /**
  * @description: 用于创建文件
  * @param {*} fileInfoList: tmpPath,username,title,intro,type,other
