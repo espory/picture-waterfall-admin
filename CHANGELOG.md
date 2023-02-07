@@ -3,6 +3,7 @@
 ### 🌟 新功能
 范围|描述|commitId
 --|--|--
+ - | 点击图⽚可弹层展示⼤图，并且可以左右切换上⼀张，下⼀张，并且也有上⾯审核通过和拒绝的操作按钮 | [850bf7b](https://github.com/picture-waterfall/picture-waterfall-admin/commit/850bf7b)
  - | 对接后端更新接口 | [8a0ccb7](https://github.com/picture-waterfall/picture-waterfall-admin/commit/8a0ccb7)
  - | 图⽚操作删除：删除此条图⽚记录 | [ca6c200](https://github.com/picture-waterfall/picture-waterfall-admin/commit/ca6c200)
  - | 完成图片审核功能 | [7edd990](https://github.com/picture-waterfall/picture-waterfall-admin/commit/7edd990)

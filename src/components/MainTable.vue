@@ -66,7 +66,7 @@
       <el-pagination
         layout="prev, pager, next"
         :pageSize="limit"
-        :total="38"
+        :total="total"
         @current-change="handleCurrentChange"
       >
       </el-pagination>
@@ -135,7 +135,7 @@ export default {
         },
         {
           value: "pass",
-          label: "同意展示",
+          label: "审核通过",
         },
         {
           value: "reject",
@@ -168,7 +168,7 @@ export default {
       this.isPreviewShow = false;
     },
     async getTotal() {
-      const { data } = getItemTotal();
+      const { data } = await getItemTotal();
       this.total = data;
     },
     async handleSelectChange(row, newStatus = "") {
