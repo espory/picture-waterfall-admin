@@ -12,6 +12,19 @@
           </el-image>
         </template>
       </el-table-column>
+      <el-table-column label="状态" width="180">
+        <template slot-scope="scope">
+          <el-select v-model="scope.row.status" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </template>
+      </el-table-column>
       <el-table-column label="日期" width="180">
         <template slot-scope="scope">
           <i class="el-icon-time"></i>
@@ -101,10 +114,24 @@ export default {
       //避免图片请求冲突
       isRequesting: false,
       // 图片加载状态
-      PIC_TYPES: {
-        LOADING: "LOADING",
-        DONE: "DONE",
-      },
+      //   PIC_TYPES: {
+      //     LOADING: "LOADING",
+      //     DONE: "DONE",
+      //   },
+      options: [
+        {
+          value: "pending",
+          label: "待处理",
+        },
+        {
+          value: "pass",
+          label: "同意展示",
+        },
+        {
+          value: "reject",
+          label: "拒绝展示",
+        },
+      ],
     };
   },
   created() {
@@ -156,7 +183,7 @@ export default {
       data.forEach((pic) => {
         // 为了加快首屏渲染，初始加载缩略图，点击图片展示大图
         pic.path = `${HOST}/small-${pic.path}`;
-        pic.status = this.PIC_TYPES.LOADING; //初始页面处于loading 状态
+        // pic.status = this.PIC_TYPES.LOADING; //初始页面处于loading 状态
         pic.updateAt = pic.updatedAt?.split(".")[0].replace("T", " ");
       });
       this.pictureList = data;
