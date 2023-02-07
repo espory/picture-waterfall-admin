@@ -7,6 +7,7 @@ export function postGetPics(limit, offset) {
     params: {
       limit,
       offset,
+      isAdmin: true,
     },
   });
 }
