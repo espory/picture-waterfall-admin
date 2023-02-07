@@ -3,13 +3,15 @@
     <el-table :data="pictureList">
       <el-table-column label="图片" width="100">
         <template slot-scope="scope">
-          <el-image
+          <ElImage
             class="table__img"
             :src="scope.row.path"
             :preview-src-list="previewPictureList"
-            @click="handleChangePreviewOrder(scope.row.path)"
+            @click="handlePreview(scope.row)"
+            :onPreviewOpen="onPreviewOpen"
+            :onPreviewClose="onPreviewClose"
           >
-          </el-image>
+          </ElImage>
         </template>
       </el-table-column>
       <el-table-column label="状态" width="180">
@@ -69,6 +71,20 @@
       >
       </el-pagination>
     </div>
+    <div v-if="isPreviewShow" class="preview-option">
+      <el-button
+        type="primary"
+        icon="el-icon-success"
+        @click="handleSelectChange(curPreview, 'pass')"
+        >审核通过</el-button
+      >
+      <el-button
+        type="danger"
+        icon="el-icon-error"
+        @click="handleSelectChange(curPreview, 'reject')"
+        >拒绝展示</el-button
+      >
+    </div>
   </div>
 </template>
 
@@ -80,7 +96,12 @@ import {
   postChangePic,
 } from "../service";
 import { HOST } from "../common/fetch";
+import ElImage from "../element-ui/image";
 export default {
+  components: {
+    ElImage,
+  },
+
   data() {
     return {
       offset: 0,
@@ -91,6 +112,8 @@ export default {
       pictureList: [],
       //预览图片
       previewPictureList: [],
+      curPreview: {},
+      isPreviewShow: false,
       //控制图片遮罩层
       mask: {
         show: false,
@@ -138,13 +161,24 @@ export default {
     // },
   },
   methods: {
+    onPreviewOpen() {
+      this.isPreviewShow = true;
+    },
+    onPreviewClose() {
+      this.isPreviewShow = false;
+    },
     async getTotal() {
       const { data } = getItemTotal();
       this.total = data;
     },
-    async handleSelectChange(row) {
+    async handleSelectChange(row, newStatus = "") {
       const { id, status } = row;
-      postChangePic(id, "status", status);
+      if (newStatus) {
+        postChangePic(id, "status", newStatus);
+        row.status = newStatus;
+      } else {
+        postChangePic(id, "status", status);
+      }
     },
     handleCurrentChange(val) {
       this.offset = (val - 1) * this.limit;
@@ -152,8 +186,9 @@ export default {
 
       console.log("当前：", val);
     },
-    handleChangePreviewOrder(path) {
+    handlePreview(row) {
       // 因为 previewList 总是在首个图片开始预览，这里做一下适配
+      const { path } = row;
       console.log(path);
       const index = this.previewPictureList.indexOf(path.replace("small-", ""));
       if (index !== -1) {
@@ -161,6 +196,7 @@ export default {
         const left = this.previewPictureList.slice(index);
         this.previewPictureList = [...left, ...right];
       }
+      this.curPreview = row;
     },
     handleEdit(index, row) {
       console.log(index, row);
@@ -194,6 +230,21 @@ export default {
 <style scoped lang="less">
 .container {
   padding: 10px 80px;
+  .preview-option {
+    .el-button:first-child {
+      position: absolute;
+      bottom: 10px;
+      bottom: 90px;
+      right: 20px;
+      z-index: 2099;
+    }
+    .el-button:last-child {
+      position: absolute;
+      bottom: 30px;
+      right: 20px;
+      z-index: 2099;
+    }
+  }
   .el-table {
     width: 100%;
     height: 100%;
