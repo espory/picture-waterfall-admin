@@ -9,6 +9,12 @@
  - | 展示上传的图⽚列表，⽀持翻⻚ | [a4444d2](https://github.com/picture-waterfall/picture-waterfall-admin/commit/a4444d2)
 
 
+### 🐛 Bug 修复
+范围|描述|commitId
+--|--|--
+ - | 管理端数据显示 | [b4c5e93](https://github.com/picture-waterfall/picture-waterfall-admin/commit/b4c5e93)
+
+
 ### 📝 文档
 范围|描述|commitId
 --|--|--

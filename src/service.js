@@ -28,6 +28,25 @@ export function postDelPic(id) {
   });
 }
 /**
+ * @description: 修改图片信息
+ * @param {*} id
+ * @param {*} attrName 属性名
+ * @param {*} value
+ * @return {*}
+ */
+export function postChangePic(id, attrName, value) {
+  return fetch({
+    url: "/pic/update",
+    method: "post",
+    data: {
+      id,
+      attrName,
+      value,
+    },
+  });
+}
+
+/**
  * @description: 用于创建文件
  * @param {*} fileInfoList: tmpPath,username,title,intro,type,other
  * @return {*}

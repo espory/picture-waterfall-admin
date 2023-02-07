@@ -14,7 +14,11 @@
       </el-table-column>
       <el-table-column label="状态" width="180">
         <template slot-scope="scope">
-          <el-select v-model="scope.row.status" placeholder="请选择">
+          <el-select
+            v-model="scope.row.status"
+            placeholder="请选择"
+            @change="handleSelectChange(scope.row)"
+          >
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -69,7 +73,12 @@
 </template>
 
 <script>
-import { postGetPics, getItemTotal, postDelPic } from "../service";
+import {
+  postGetPics,
+  getItemTotal,
+  postDelPic,
+  postChangePic,
+} from "../service";
 import { HOST } from "../common/fetch";
 export default {
   data() {
@@ -132,6 +141,10 @@ export default {
     async getTotal() {
       const { data } = getItemTotal();
       this.total = data;
+    },
+    async handleSelectChange(row) {
+      const { id, status } = row;
+      postChangePic(id, "status", status);
     },
     handleCurrentChange(val) {
       this.offset = (val - 1) * this.limit;
