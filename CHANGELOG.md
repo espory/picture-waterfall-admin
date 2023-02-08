@@ -5,6 +5,7 @@
 --|--|--
  - | 点击图⽚可弹层展示⼤图，并且可以左右切换上⼀张，下⼀张，并且也有上⾯审核通过和拒绝的操作按钮 | [850bf7b](https://github.com/picture-waterfall/picture-waterfall-admin/commit/850bf7b)
  - | 对接后端更新接口 | [8a0ccb7](https://github.com/picture-waterfall/picture-waterfall-admin/commit/8a0ccb7)
+ - | 添加新的列表项 | [ec70262](https://github.com/picture-waterfall/picture-waterfall-admin/commit/ec70262)
  - | 添加状态筛选框 | [4ab5831](https://github.com/picture-waterfall/picture-waterfall-admin/commit/4ab5831)
  - | 图⽚操作删除：删除此条图⽚记录 | [ca6c200](https://github.com/picture-waterfall/picture-waterfall-admin/commit/ca6c200)
  - | 完成图片审核功能 | [7edd990](https://github.com/picture-waterfall/picture-waterfall-admin/commit/7edd990)

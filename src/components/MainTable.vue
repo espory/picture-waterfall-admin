@@ -230,7 +230,7 @@ export default {
     async drop(ev, { id, timestamp }) {
       ev.preventDefault();
       if (this.dragId && this.dragId !== id) {
-        await postChangePic(this.dragId, "timestamp", timestamp + 1);
+        await postChangePic(this.dragId, "timestamp", timestamp + 10);
       }
       this.$message({
         message: "调整成功",
