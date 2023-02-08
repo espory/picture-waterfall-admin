@@ -40,7 +40,17 @@
           <span style="margin-left: 10px">{{ scope.row.updateAt }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" width="300">
+      <el-table-column
+        label="状态"
+        column-key="status"
+        width="300"
+        :filters="[
+          { text: '待处理', value: 'pending' },
+          { text: '审批通过', value: 'pass' },
+          { text: '拒绝展示', value: 'reject' },
+        ]"
+        :filter-method="filterHandler"
+      >
         <template slot-scope="scope">
           <el-select
             v-model="scope.row.status"
@@ -191,6 +201,10 @@ export default {
     },
     allowDrop(ev) {
       ev.preventDefault();
+    },
+    filterHandler(value, row, column) {
+      const { columnKey } = column;
+      return row[columnKey] === value;
     },
     drag({ id }) {
       this.dragId = id;
