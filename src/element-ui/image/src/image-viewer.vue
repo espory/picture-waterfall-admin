@@ -88,6 +88,7 @@ export default {
   name: "elImageViewer",
 
   props: {
+    onChangePreview: Function,
     urlList: {
       type: Array,
       default: () => [],
@@ -292,11 +293,13 @@ export default {
       if (this.isFirst && !this.infinite) return;
       const len = this.urlList.length;
       this.index = (this.index - 1 + len) % len;
+      this.onChangePreview(this.urlList[this.index]);
     },
     next() {
       if (this.isLast && !this.infinite) return;
       const len = this.urlList.length;
       this.index = (this.index + 1) % len;
+      this.onChangePreview(this.urlList[this.index]);
     },
     handleActions(action, options = {}) {
       if (this.loading) return;

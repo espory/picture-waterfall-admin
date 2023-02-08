@@ -14,6 +14,7 @@
             @dragover="allowDrop"
             :onPreviewOpen="onPreviewOpen"
             :onPreviewClose="onPreviewClose"
+            :onChangePreview="onChangePreview"
           >
           </ElImage>
         </template>
@@ -231,6 +232,13 @@ export default {
 
       console.log("当前：", val);
     },
+    onChangePreview(previewImgUrl) {
+      const pic = this.pictureList.find((pic) => {
+        return pic.path.replace("small-", "") === previewImgUrl;
+      });
+      this.curPreview = pic;
+    },
+
     handlePreview(row) {
       // 因为 previewList 总是在首个图片开始预览，这里做一下适配
       const { path } = row;

@@ -26,6 +26,7 @@
         v-if="showViewer"
         :on-close="closeViewer"
         :url-list="previewSrcList"
+        :onChangePreview="onChangePreview"
       />
     </template>
   </div>
@@ -69,9 +70,11 @@ export default {
   props: {
     onPreviewClose: Function,
     onPreviewOpen: Function,
+    onChangePreview: Function,
     src: String,
     fit: String,
     lazy: Boolean,
+    initialIndex: Number,
     scrollContainer: {},
     previewSrcList: {
       type: Array,
