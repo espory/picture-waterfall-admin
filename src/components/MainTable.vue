@@ -20,30 +20,39 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="名称" width="300">
+      <el-table-column label="名称" width="200">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{
             scope.row.title || "暂无内容"
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="信息介绍" width="300">
+      <el-table-column label="信息介绍" width="200">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{
             scope.row.intro || "暂无内容"
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="其他" width="300">
+      <el-table-column label="种类" width="200">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span style="margin-left: 10px">{{ scope.row.updateAt }}</span>
+          <span style="margin-left: 10px">{{
+            scope.row.type || "暂无内容"
+          }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="其他" width="200">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{
+            scope.row.other || "暂无内容"
+          }}</span>
+        </template>
+      </el-table-column>
+
       <el-table-column
         label="状态"
         column-key="status"
-        width="300"
+        width="200"
         :filters="[
           { text: '待处理', value: 'pending' },
           { text: '审批通过', value: 'pass' },
@@ -78,6 +87,12 @@
           </el-popover>
         </template>
       </el-table-column> -->
+      <el-table-column label="日期" width="200">
+        <template slot-scope="scope">
+          <i class="el-icon-time"></i>
+          <span style="margin-left: 10px">{{ scope.row.updateAt }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleTop(scope.$index, scope.row)"
