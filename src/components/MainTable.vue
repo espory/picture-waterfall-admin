@@ -4,17 +4,42 @@
       <el-table-column label="图片" width="100">
         <template slot-scope="scope">
           <ElImage
+            draggable="true"
             class="table__img"
             :src="scope.row.path"
             :preview-src-list="previewPictureList"
             @click="handlePreview(scope.row)"
+            @drag="drag(scope.row)"
+            @drop="drop($event, scope.row)"
+            @dragover="allowDrop"
             :onPreviewOpen="onPreviewOpen"
             :onPreviewClose="onPreviewClose"
           >
           </ElImage>
         </template>
       </el-table-column>
-      <el-table-column label="状态" width="180">
+
+      <el-table-column label="名称" width="300">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{
+            scope.row.title || "暂无内容"
+          }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="信息介绍" width="300">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{
+            scope.row.intro || "暂无内容"
+          }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="其他" width="300">
+        <template slot-scope="scope">
+          <i class="el-icon-time"></i>
+          <span style="margin-left: 10px">{{ scope.row.updateAt }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="状态" width="300">
         <template slot-scope="scope">
           <el-select
             v-model="scope.row.status"
@@ -31,12 +56,6 @@
           </el-select>
         </template>
       </el-table-column>
-      <el-table-column label="日期" width="180">
-        <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span style="margin-left: 10px">{{ scope.row.updateAt }}</span>
-        </template>
-      </el-table-column>
       <!-- <el-table-column label="姓名" width="180">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
@@ -50,8 +69,8 @@
       </el-table-column> -->
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-            >编辑</el-button
+          <el-button size="mini" @click="handleTop(scope.$index, scope.row)"
+            >置顶</el-button
           >
           <el-button
             size="mini"
@@ -114,6 +133,8 @@ export default {
       previewPictureList: [],
       curPreview: {},
       isPreviewShow: false,
+      //拖拽图片的 id
+      dragId: null,
       //控制图片遮罩层
       mask: {
         show: false,
@@ -167,6 +188,26 @@ export default {
     onPreviewClose() {
       this.isPreviewShow = false;
     },
+    allowDrop(ev) {
+      ev.preventDefault();
+    },
+    drag({ id }) {
+      this.dragId = id;
+      //   console.log(id, timestamp);
+      //   ev.dataTransfer.setData("text/plain", "ybw");
+      //   console.log(ev.dataTransfer);
+    },
+    async drop(ev, { id, timestamp }) {
+      ev.preventDefault();
+      if (this.dragId && this.dragId !== id) {
+        await postChangePic(this.dragId, "timestamp", timestamp + 1);
+      }
+      this.$message({
+        message: "调整成功",
+        type: "success",
+      });
+      this.getData();
+    },
     async getTotal() {
       const { data } = await getItemTotal();
       this.total = data;
@@ -174,11 +215,15 @@ export default {
     async handleSelectChange(row, newStatus = "") {
       const { id, status } = row;
       if (newStatus) {
-        postChangePic(id, "status", newStatus);
+        await postChangePic(id, "status", newStatus);
         row.status = newStatus;
       } else {
-        postChangePic(id, "status", status);
+        await postChangePic(id, "status", status);
       }
+      this.$message({
+        message: "修改成功",
+        type: "success",
+      });
     },
     handleCurrentChange(val) {
       this.offset = (val - 1) * this.limit;
@@ -198,13 +243,25 @@ export default {
       }
       this.curPreview = row;
     },
-    handleEdit(index, row) {
+    async handleTop(index, row) {
       console.log(index, row);
+      const { id } = row;
+      await postChangePic(id, "timestamp", new Date().getTime() * 10000);
+      this.$message({
+        message: "置顶成功",
+        type: "success",
+      });
+      this.getData();
     },
     async handleDelete(index, row) {
       const { id } = row;
       await postDelPic(id);
       this.pictureList.splice(index, 1);
+      this.$message({
+        message: "删除成功",
+        type: "success",
+      });
+      this.getTotal();
     },
     async getData() {
       this.isRequesting = true;

@@ -1,4 +1,4 @@
-# 0.1.0 (2023-02-07)
+# 0.1.0 (2023-02-08)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -14,6 +14,7 @@
 ### 🐛 Bug 修复
 范围|描述|commitId
 --|--|--
+ - | 表格显示上的问题 | [0e0afe3](https://github.com/picture-waterfall/picture-waterfall-admin/commit/0e0afe3)
  - | 管理端数据显示 | [b4c5e93](https://github.com/picture-waterfall/picture-waterfall-admin/commit/b4c5e93)
 
 
