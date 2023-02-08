@@ -17,6 +17,7 @@
 --|--|--
  - | 表格显示上的问题 | [0e0afe3](https://github.com/picture-waterfall/picture-waterfall-admin/commit/0e0afe3)
  - | 管理端数据显示 | [b4c5e93](https://github.com/picture-waterfall/picture-waterfall-admin/commit/b4c5e93)
+ - | 缺少 throttle-debounce 依赖 | [a640eb1](https://github.com/picture-waterfall/picture-waterfall-admin/commit/a640eb1)
 
 
 ### 📝 文档

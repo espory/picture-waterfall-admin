@@ -41,7 +41,7 @@ import {
   isInContainer,
 } from "element-ui/src/utils/dom";
 import { isString, isHtmlElement } from "element-ui/src/utils/types";
-import throttle from "throttle-debounce/throttle";
+import throttle from "throttle-debounce";
 
 const isSupportObjectFit = () =>
   document.documentElement.style.objectFit !== undefined;
