@@ -171,7 +171,7 @@ export default {
       //避免图片请求冲突
       isRequesting: false,
       // 图片加载状态
-      //   PIC_TYPES: {
+      //   picTypes: {
       //     LOADING: "LOADING",
       //     DONE: "DONE",
       //   },
@@ -306,7 +306,7 @@ export default {
       data.forEach((pic) => {
         // 为了加快首屏渲染，初始加载缩略图，点击图片展示大图
         pic.path = `${HOST}/small-${pic.path}`;
-        // pic.status = this.PIC_TYPES.LOADING; //初始页面处于loading 状态
+        // pic.status = this.picTypes.LOADING; //初始页面处于loading 状态
         pic.updateAt = pic.updatedAt?.split(".")[0].replace("T", " ");
       });
       this.pictureList = data;

@@ -1,7 +1,7 @@
 import axios from "axios";
 export const HOST =
   process.env.NODE_ENV === "development"
-    ? "http://192.168.3.5:8000"
+    ? "http://127.0.0.1:8000"
     : "http://101.43.119.45:8000";
 console.log(HOST);
 
